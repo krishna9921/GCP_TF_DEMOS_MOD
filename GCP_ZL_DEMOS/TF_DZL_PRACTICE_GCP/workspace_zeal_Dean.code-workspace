@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "..\\AWS_USING_TF\\Demos_fina\\Terraform_demos"
+		},
+		{
+			"path": "..\\GCP_USING_TF"
+		}
+	],
+	"settings": {}
+}

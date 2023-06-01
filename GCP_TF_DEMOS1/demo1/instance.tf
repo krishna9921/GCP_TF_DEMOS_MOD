@@ -1,0 +1,32 @@
+# Download the key.json from https://console.cloud.google.com/apis/credentials/serviceaccountkey?pli
+
+provider "google" {
+    project = "cloudsqldeepdive"
+    region = "asia-southeast1"
+    #copy the key.json to demo1 directory 
+    credentials = file("key.json")
+}
+resource "google_compute_address" "static" {
+  name = "ipv4-address"
+}
+resource "google_compute_instance" "demo1" {
+    name = "demo1"
+    machine_type = "f1-micro"
+    zone = "asia-southeast1-a"
+    
+boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
+    }
+}
+
+    network_interface {
+    network = "default"
+    #Including the below code to get the external ip
+    access_config {
+      nat_ip = google_compute_address.static.address
+    }
+  }
+
+}    
+
